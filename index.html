@@ -3,8 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>네이버와트 기숙사 점수 모래시계</title>
+  <title>호그와트 기숙사 점수 모래시계</title>
   <link rel="stylesheet" href="styles.css">
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+  <script>
+
+    const firebaseConfig = {
+  apiKey: "AIzaSyC-q1VVf-nRGo-yPIy1Z2UiC5THoA1WLHo",
+  authDomain: "naverwarthousepoints.firebaseapp.com",
+  projectId: "naverwarthousepoints",
+  storageBucket: "naverwarthousepoints.appspot.com",
+  messagingSenderId: "571518668204",
+  appId: "1:571518668204:web:374981efcb49b687223e09"
+};
+    // Firebase 초기화
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+  </script>
 </head>
 <body>
   <div class="container">
@@ -31,25 +47,5 @@
   </div>
 
   <script src="point.js"></script>
-
-  <script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
-
-  // Your web app's Firebase configuration
-  const firebaseConfig = {
-    apiKey: "AIzaSyC-q1VVf-nRGo-yPIy1Z2UiC5THoA1WLHo",
-    authDomain: "naverwarthousepoints.firebaseapp.com",
-    projectId: "naverwarthousepoints",
-    storageBucket: "naverwarthousepoints.appspot.com",
-    messagingSenderId: "571518668204",
-    appId: "1:571518668204:web:374981efcb49b687223e09"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-</script>
 </body>
 </html>
