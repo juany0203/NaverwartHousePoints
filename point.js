@@ -22,22 +22,28 @@ function openPointsPopup() {
 
 function addPoints(house, points) {
   let scoreElement, sandElement;
+  let houseKey;
+
   switch(house) {
     case '그리핀도르':
       scoreElement = document.getElementById('gryffindor-score');
       sandElement = document.getElementById('gryffindor-sand');
+      houseKey = 'gryffindor';
       break;
     case '후플푸프':
       scoreElement = document.getElementById('hufflepuff-score');
       sandElement = document.getElementById('hufflepuff-sand');
+      houseKey = 'hufflepuff';
       break;
     case '슬리데린':
       scoreElement = document.getElementById('slytherin-score');
       sandElement = document.getElementById('slytherin-sand');
+      houseKey = 'slytherin';
       break;
     case '래번클로':
       scoreElement = document.getElementById('ravenclaw-score');
       sandElement = document.getElementById('ravenclaw-sand');
+      houseKey = 'ravenclaw';
       break;
     default:
       alert('잘못된 기숙사 이름입니다.');
@@ -48,7 +54,16 @@ function addPoints(house, points) {
   currentScore += points;
   scoreElement.textContent = currentScore;
 
-  let sandHeight = (currentScore / 3000) * 100;
+  // Firestore에 점수 업데이트
+  db.collection('housePoints').doc(houseKey).set({
+    score: currentScore
+  });
+
+  updateSand(sandElement, currentScore);
+}
+
+function updateSand(sandElement, score) {
+  let sandHeight = (score / 3000) * 100;
   sandElement.innerHTML = '';  // Clear previous icons
 
   for (let i = 0; i < sandHeight; i++) {
@@ -57,3 +72,25 @@ function addPoints(house, points) {
     sandElement.appendChild(icon);
   }
 }
+
+// Load scores from Firestore on page load
+function loadScores() {
+  const houses = ['gryffindor', 'hufflepuff', 'slytherin', 'ravenclaw'];
+  houses.forEach(house => {
+    db.collection('housePoints').doc(house).get().then((doc) => {
+      if (doc.exists) {
+        const score = doc.data().score;
+        const scoreElement = document.getElementById(`${house}-score`);
+        const sandElement = document.getElementById(`${house}-sand`);
+        scoreElement.textContent = score;
+        updateSand(sandElement, score);
+      } else {
+        console.log(`${house} does not have any data.`);
+      }
+    }).catch((error) => {
+      console.log("Error getting document:", error);
+    });
+  });
+}
+
+document.addEventListener('DOMContentLoaded', loadScores);
