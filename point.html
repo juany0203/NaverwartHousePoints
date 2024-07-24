@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>호그와트 기숙사 점수 모래시계</title>
+  <link rel="stylesheet" href="point.css">
+</head>
+<body>
+  <div class="container">
+    <div class="house" id="gryffindor">
+      <div class="sand" id="gryffindor-sand"></div>
+      <div class="house-name">그리핀도르</div>
+      <div class="house-score" id="gryffindor-score">0</div>
+    </div>
+    <div class="house" id="hufflepuff">
+      <div class="sand" id="hufflepuff-sand"></div>
+      <div class="house-name">후플푸프</div>
+      <div class="house-score" id="hufflepuff-score">0</div>
+    </div>
+    <div class="house" id="slytherin">
+      <div class="sand" id="slytherin-sand"></div>
+      <div class="house-name">슬리데린</div>
+      <div class="house-score" id="slytherin-score">0</div>
+    </div>
+    <div class="house" id="ravenclaw">
+      <div class="sand" id="ravenclaw-sand"></div>
+      <div class="house-name">래번클로</div>
+      <div class="house-score" id="ravenclaw-score">0</div>
+    </div>
+  </div>
+
+  <div id="login-popup">
+    <label for="password">암호 입력: </label>
+    <input type="password" id="password">
+    <button onclick="verifyPassword()">확인</button>
+  </div>
+
+  <script src="point.js"></script>
+</body>
+</html>
